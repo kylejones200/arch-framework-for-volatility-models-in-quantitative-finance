@@ -36,7 +36,7 @@ def forecast_volatility(model, horizon: int = 10):
     return forecast.variance.iloc[-1]
 
 def plot_returns_volatility(returns: np.ndarray, volatility: np.ndarray, output_path: Path):
- """Plot returns and volatility """
+    """Plot returns and volatility """
     fig, axes = plt.subplots(2, 1, figsize=(10, 6), sharex=True)
     
     axes[0].plot(returns, color="#4A90A4", linewidth=1.2)
@@ -50,7 +50,7 @@ def plot_returns_volatility(returns: np.ndarray, volatility: np.ndarray, output_
     plt.close()
 
 def plot_volatility_forecast(forecast_variance: pd.Series, output_path: Path):
- """Plot forecasted volatility """
+    """Plot forecasted volatility """
     fig, ax = plt.subplots(figsize=(10, 6))
     
     ax.plot(forecast_variance.values, marker="o", color="#4A90A4", 
