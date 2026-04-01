@@ -1,13 +1,12 @@
-data:
-  source: null
-  generate_synthetic: true
-  n_periods: 1000
+simulation:
+  n: 1000
+  omega: 0.1
+  alpha: 0.8
   seed: 42
 
 model:
-  vol_type: "GARCH"
+  vol_type: "ARCH"
   p: 1
-  q: 1
 
 forecast:
   horizon: 10

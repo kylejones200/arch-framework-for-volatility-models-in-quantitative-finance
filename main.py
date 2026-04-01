@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 """
-ARCH Framework for Volatility Models in Quantitative Finance
+ARCH Framework for Volatility Models
 
-Main entry point for running ARCH/GARCH volatility modeling.
+Main entry point for running ARCH volatility modeling.
 """
 
 import argparse
@@ -10,8 +10,14 @@ import yaml
 import logging
 import pandas as pd
 from pathlib import Path
+from src.core import ((level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s")
+    simulate_returns_with_volatility_clustering,
+    fit_arch_model,
+    forecast_volatility,
+)
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s")
+
 def load_config(config_path: Path = None) -> dict:
     """Load configuration from YAML file."""
     if config_path is None:
@@ -21,40 +27,32 @@ def load_config(config_path: Path = None) -> dict:
         return yaml.safe_load(f)
 
 def main():
-    parser = argparse.ArgumentParser(description='ARCH Framework for Volatility Models')
+    parser = argparse.ArgumentParser(description='ARCH Volatility Models')
     parser.add_argument('--config', type=Path, default=None, help='Path to config file')
-    parser.add_argument('--data-path', type=Path, default=None, help='Path to data file')
-    parser.add_argument('--output-dir', type=Path, default=None, help='Output directory')
+    parser.add_argument('--output-dir', type=Path, default=None, help='Output directory for plots')
     args = parser.parse_args()
     
     config = load_config(args.config)
     output_dir = Path(args.output_dir) if args.output_dir else Path(config['output']['figures_dir'])
     output_dir.mkdir(exist_ok=True)
     
-    if args.data_path and args.data_path.exists():
-        returns = pd.read_csv(args.data_path, index_col=0, parse_dates=True).iloc[:, 0]
-    elif config['data']['generate_synthetic']:
-                returns, volatility = simulate_returns_volatility(config['data']['n_periods'],
-                                                         config['data']['seed'])
-    else:
-        raise ValueError("No data source specified")
+        returns, volatility = simulate_returns_with_volatility_clustering(
+        config['simulation']['n'],
+        config['simulation']['omega'],
+        config['simulation']['alpha'],
+        config['simulation']['seed']
+    )
     
-        garch_fit = fit_garch_model(returns, config['model']['p'], config['model']['q'])
-    logging.info(garch_fit.summary())
+    data = pd.DataFrame({"returns": returns, "volatility": volatility})
+    plot_returns_volatility(returns, volatility, output_dir / 'simulated_returns_volatility.png')
     
-        forecast_var = forecast_volatility(garch_fit, config['forecast']['horizon'])
+        arch_model_fit = fit_arch_model(data["returns"], config['model']['vol_type'], config['model']['p'])
+    logging.info(f"\n{arch_model_fit.summary()}")
     
-    if config['data']['generate_synthetic']:
-        plot_volatility_analysis(returns, volatility, forecast_var,
-                               "ARCH Framework: Volatility Modeling",
-                               output_dir / 'volatility_analysis.png')
-    else:
-        volatility = pd.Series(np.abs(returns), index=returns.index)
-        plot_volatility_analysis(returns, volatility, forecast_var,
-                               "ARCH Framework: Volatility Modeling",
-                               output_dir / 'volatility_analysis.png')
+        forecast_variance = forecast_volatility(arch_model_fit, config['forecast']['horizon'])
+    plot_volatility_forecast(forecast_variance, output_dir / 'forecasted_volatility.png')
     
-    logging.info(f"\nAnalysis complete. Figures saved to {output_dir}")
+    logging.info(f"Analysis complete. Figures saved to {output_dir}")
 
 if __name__ == "__main__":
     main()

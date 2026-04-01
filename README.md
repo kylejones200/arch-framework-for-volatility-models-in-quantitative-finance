@@ -1,10 +1,6 @@
-# ARCH Framework for Volatility Models in Quantitative Finance
+# ARCH Framework for Volatility Models
 
-This project demonstrates ARCH and GARCH models for volatility modeling in quantitative finance.
-
-## Article
-
-Medium article: [ARCH Framework for Volatility Models in Quantitative Finance](https://medium.com/@kylejones_47003/arch-framework-for-volatility-models-in-quantitative-finance-2dba4155ee09)
+This project demonstrates volatility modeling using ARCH (Autoregressive Conditional Heteroskedasticity) models.
 
 ## Project Structure
 
@@ -15,7 +11,7 @@ Medium article: [ARCH Framework for Volatility Models in Quantitative Finance](h
 ├── config.yaml        # Configuration file
 ├── requirements.txt   # Python dependencies
 ├── src/               # Core functions
-│   ├── core.py        # ARCH/GARCH functions
+│   ├── core.py        # ARCH modeling functions
 │   └── plotting.py    # Tufte-style plotting utilities
 ├── tests/             # Unit tests
 ├── data/              # Data files
@@ -25,21 +21,20 @@ Medium article: [ARCH Framework for Volatility Models in Quantitative Finance](h
 ## Configuration
 
 Edit `config.yaml` to customize:
-- Data source or synthetic generation
-- GARCH parameters (p, q)
+- Simulation parameters (n, omega, alpha)
+- Model type (ARCH, GARCH, etc.)
 - Forecast horizon
 - Output settings
 
-## ARCH/GARCH Models
+## ARCH Models
 
-ARCH framework:
-- **ARCH**: Autoregressive Conditional Heteroskedasticity
-- **GARCH**: Generalized ARCH
-- **Volatility clustering**: Models volatility persistence
-- **Forecasting**: Predicts future volatility
+ARCH models capture volatility clustering:
+- **Volatility Clustering**: High volatility periods followed by high volatility
+- **Conditional Heteroskedasticity**: Variance depends on past squared errors
+- **Forecasting**: Predict future volatility based on current conditions
 
 ## Caveats
 
 - By default, generates synthetic returns with volatility clustering.
-- GARCH models assume specific volatility dynamics.
-- Model selection (p, q) requires careful consideration.
+- ARCH models assume volatility depends only on past squared errors.
+- For more complex dynamics, consider GARCH or other extensions.
