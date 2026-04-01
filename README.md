@@ -1,13 +1,45 @@
 # ARCH Framework for Volatility Models in Quantitative Finance
 
-**Published:** 2025-06-18
-**Medium:** [https://medium.com/@kyle-t-jones/arch-framework-for-volatility-models-in-quantitative-finance-2dba4155ee09](https://medium.com/@kyle-t-jones/arch-framework-for-volatility-models-in-quantitative-finance-2dba4155ee09)
+This project demonstrates ARCH and GARCH models for volatility modeling in quantitative finance.
 
-## About
+## Article
 
-Place the code for this article in this repository.
-The original article export is saved as `article.md`.
+Medium article: [ARCH Framework for Volatility Models in Quantitative Finance](https://medium.com/@kylejones_47003/arch-framework-for-volatility-models-in-quantitative-finance-2dba4155ee09)
 
-## Files
+## Project Structure
 
-Add your `.ipynb`, `.py`, `.yaml`, `.js`, `.ts`, or other project files here.
+```
+.
+├── README.md           # This file
+├── main.py            # Main entry point
+├── config.yaml        # Configuration file
+├── requirements.txt   # Python dependencies
+├── src/               # Core functions
+│   ├── core.py        # ARCH/GARCH functions
+│   └── plotting.py    # Tufte-style plotting utilities
+├── tests/             # Unit tests
+├── data/              # Data files
+└── images/            # Generated plots and figures
+```
+
+## Configuration
+
+Edit `config.yaml` to customize:
+- Data source or synthetic generation
+- GARCH parameters (p, q)
+- Forecast horizon
+- Output settings
+
+## ARCH/GARCH Models
+
+ARCH framework:
+- **ARCH**: Autoregressive Conditional Heteroskedasticity
+- **GARCH**: Generalized ARCH
+- **Volatility clustering**: Models volatility persistence
+- **Forecasting**: Predicts future volatility
+
+## Caveats
+
+- By default, generates synthetic returns with volatility clustering.
+- GARCH models assume specific volatility dynamics.
+- Model selection (p, q) requires careful consideration.
