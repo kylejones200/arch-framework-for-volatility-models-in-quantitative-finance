@@ -35,29 +35,31 @@ def forecast_volatility(model, horizon: int = 10):
     forecast = model.forecast(horizon=horizon)
     return forecast.variance.iloc[-1]
 
-def plot_returns_volatility(returns: np.ndarray, volatility: np.ndarray, output_path: Path):
+def plot_returns_volatility(returns: np.ndarray, volatility: np.ndarray, output_path: Path, plot: bool = False):
     """Plot returns and volatility """
-    fig, axes = plt.subplots(2, 1, figsize=(10, 6), sharex=True)
+    if plot:
+        fig, axes = plt.subplots(2, 1, figsize=(10, 6), sharex=True)
     
-    axes[0].plot(returns, color="#4A90A4", linewidth=1.2)
-    axes[0].set_ylabel("Returns")
+        axes[0].plot(returns, color="#4A90A4", linewidth=1.2)
+        axes[0].set_ylabel("Returns")
     
-    axes[1].plot(volatility, color="#D4A574", linewidth=1.2)
-    axes[1].set_xlabel("Time")
-    axes[1].set_ylabel("Volatility")
+        axes[1].plot(volatility, color="#D4A574", linewidth=1.2)
+        axes[1].set_xlabel("Time")
+        axes[1].set_ylabel("Volatility")
     
-    plt.savefig(output_path, dpi=100, bbox_inches="tight")
-    plt.close()
+        plt.savefig(output_path, dpi=100, bbox_inches="tight")
+        plt.close()
 
-def plot_volatility_forecast(forecast_variance: pd.Series, output_path: Path):
+def plot_volatility_forecast(forecast_variance: pd.Series, output_path: Path, plot: bool = False):
     """Plot forecasted volatility """
-    fig, ax = plt.subplots(figsize=(10, 6))
+    if plot:
+        fig, ax = plt.subplots(figsize=(10, 6))
     
-    ax.plot(forecast_variance.values, marker="o", color="#4A90A4", 
-           linewidth=1.2, markersize=4)
-    ax.set_xlabel("Horizon")
-    ax.set_ylabel("Variance")
+        ax.plot(forecast_variance.values, marker="o", color="#4A90A4", 
+               linewidth=1.2, markersize=4)
+        ax.set_xlabel("Horizon")
+        ax.set_ylabel("Variance")
     
-    plt.savefig(output_path, dpi=100, bbox_inches="tight")
-    plt.close()
+        plt.savefig(output_path, dpi=100, bbox_inches="tight")
+        plt.close()
 
