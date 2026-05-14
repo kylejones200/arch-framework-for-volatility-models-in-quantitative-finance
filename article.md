@@ -33,9 +33,9 @@ If α1+β1\<1, volatility eventually returns to a long-run average. If the sum i
 ### What Makes a Model an ARCH Model?
 Three elements define an ARCH-type model:
 
-1.  [**Conditional Heteroskedasticity.** Variance is not fixed. It changes over time, depending on past values.]
-2.  [**Dependence on Past Errors.** The model uses r\_{t-i}², the size of past returns, not just their sign.]
-3.  [**Recursion.** The model updates volatility iteratively, with each new observation.]
+1.  [Conditional Heteroskedasticity. Variance is not fixed. It changes over time, depending on past values.]
+2.  [Dependence on Past Errors. The model uses r\_{t-i}², the size of past returns, not just their sign.]
+3.  [Recursion. The model updates volatility iteratively, with each new observation.]
 
 ARCH models focus on second moments. They do not predict return direction. They model uncertainty --- and how it moves.
 
@@ -44,10 +44,10 @@ Markets react differently to good and bad news. A sharp drop in price increases 
 
 Several extensions address the problem:
 
-- **EGARCH (Exponential GARCH).** Models the log of variance. Allows negative shocks to have larger impact.
+- EGARCH (Exponential GARCH). Models the log of variance. Allows negative shocks to have larger impact.
 
 
-- **GJR-GARCH.** Adds a dummy for negative returns:
+- GJR-GARCH. Adds a dummy for negative returns:
 
 
 These models are essential for equity data, where downturns drive volatility.

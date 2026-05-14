@@ -29,9 +29,9 @@ Edit `config.yaml` to customize:
 ## ARCH Models
 
 ARCH models capture volatility clustering:
-- **Volatility Clustering**: High volatility periods followed by high volatility
-- **Conditional Heteroskedasticity**: Variance depends on past squared errors
-- **Forecasting**: Predict future volatility based on current conditions
+- Volatility Clustering: High volatility periods followed by high volatility
+- Conditional Heteroskedasticity: Variance depends on past squared errors
+- Forecasting: Predict future volatility based on current conditions
 
 ## Caveats
 
