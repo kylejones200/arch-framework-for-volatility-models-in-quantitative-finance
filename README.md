@@ -1,5 +1,9 @@
 # ARCH Framework for Volatility Models
 
+Published: yes
+Medium: [https://medium.com/@kyle-t-jones/arch-framework-for-volatility-models-in-quantitative-finance-2dba4155ee09](https://medium.com/@kyle-t-jones/arch-framework-for-volatility-models-in-quantitative-finance-2dba4155ee09)
+
+
 This project demonstrates volatility modeling using ARCH (Autoregressive Conditional Heteroskedasticity) models.
 
 ## Project Structure
