@@ -4,13 +4,13 @@ import pandas as pd
 import matplotlib.pyplot as plt
 from arch import arch_model
 import logging
+np.random.seed(42)
 
 # Set random seed for reproducibility
 
 # Configure logging
 logging.basicConfig(level=logging.INFO, format='%(message)s')
 
-np.random.seed(42)
 
 # Simulate returns with volatility clustering
 n = 1000

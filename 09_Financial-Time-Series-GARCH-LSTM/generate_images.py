@@ -14,7 +14,6 @@ import matplotlib.pyplot as plt
 from pathlib import Path
 
 # Set random seeds
-np.random.seed(42)
 try:
     import tensorflow as tf
     tf.random.set_seed(42)
@@ -51,6 +50,7 @@ plt.savefig = savefig_tufte
 
 # Code block 2
 from arch import arch_model
+np.random.seed(42)
 
 # GARCH(1,1) model
 garch_model = arch_model(returns, vol='Garch', p=1, q=1)
