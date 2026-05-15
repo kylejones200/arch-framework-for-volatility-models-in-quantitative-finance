@@ -3,7 +3,6 @@
 import numpy as np
 import pandas as pd
 from pathlib import Path
-from typing import Tuple
 from arch import arch_model
 import matplotlib.pyplot as plt
 import logging
@@ -12,7 +11,7 @@ import logging
 logging.basicConfig(level=logging.INFO, format='%(message)s')
 
 def simulate_returns_with_volatility_clustering(n: int = 1000, omega: float = 0.1,
-                                               alpha: float = 0.8, seed: int = 42) -> Tuple[np.ndarray, np.ndarray]:
+                                               alpha: float = 0.8, seed: int = 42) -> tuple[np.ndarray, np.ndarray]:
     """Simulate returns with volatility clustering (ARCH process)."""
     np.random.seed(seed)
     errors = np.random.normal(size=n)
