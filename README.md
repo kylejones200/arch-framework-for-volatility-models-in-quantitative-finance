@@ -6,6 +6,14 @@ Medium: [https://medium.com/@kyle-t-jones/arch-framework-for-volatility-models-i
 
 This project demonstrates volatility modeling using ARCH (Autoregressive Conditional Heteroskedasticity) models.
 
+## Business context
+
+Markets do not move with constant force. Their volatility --- the size of price changes --- fluctuates over time. Traders see it. Charts show it. Econometricians model it.
+
+ARCH models began with a simple idea: model volatility, not just returns. In the early 1980s, Robert Engle proposed that large shocks tend to be followed by large shocks, even if the direction of the move is random. This was the key to volatility clustering.
+
+ARCH models are popular because they match real data better than constant-variance models. They are simple to estimate and interpret. Traders use them to improve forecasting for risk management, options pricing, and portfolio allocation. The models also allow volatility to respond to recent events.
+
 ## Project Structure
 
 ```
