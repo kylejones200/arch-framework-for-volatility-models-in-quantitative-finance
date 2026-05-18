@@ -2,6 +2,8 @@
 Generated script to create Tufte-style visualizations
 """
 
+import logging
+
 import matplotlib.pyplot as plt
 import numpy as np
 import torch
@@ -9,7 +11,7 @@ import torch.nn as nn
 from arch import arch_model
 from torch.utils.data import DataLoader, TensorDataset
 
-
+logger = logging.getLogger(__name__)
 class _LSTMForecaster(nn.Module):
     """LSTM forecaster (auto-generated PyTorch replacement for Keras Sequential)."""
 
@@ -95,13 +97,9 @@ def savefig_tufte(filename, **kwargs):
 
 def main() -> None:
     plt.savefig = savefig_tufte
-
     np.random.seed(42)
-
     garch_model = arch_model(returns, vol="Garch", p=1, q=1)
-
-    garch_fitted = garch_model.fit()
-
+    garch_model.fit()
     logger.info("All images generated successfully!")
 
 

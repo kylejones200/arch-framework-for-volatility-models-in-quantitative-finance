@@ -1,15 +1,11 @@
 """Core functions for ARCH volatility modeling."""
 
-import logging
 from pathlib import Path
 
 import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
 from arch import arch_model
-
-# Configure logging
-logging.basicConfig(level=logging.INFO, format="%(message)s")
 
 
 def simulate_returns_with_volatility_clustering(
@@ -20,7 +16,6 @@ def simulate_returns_with_volatility_clustering(
     errors = np.random.normal(size=n)
     volatility = np.zeros(n)
     returns = np.zeros(n)
-
     for t in range(1, n):
         volatility[t] = np.sqrt(omega + alpha * errors[t - 1] ** 2)
         returns[t] = volatility[t] * np.random.normal()
@@ -48,14 +43,11 @@ def plot_returns_volatility(
         return
 
     fig, axes = plt.subplots(2, 1, figsize=(10, 6), sharex=True)
-
     axes[0].plot(returns, color="#4A90A4", linewidth=1.2)
     axes[0].set_ylabel("Returns")
-
     axes[1].plot(volatility, color="#D4A574", linewidth=1.2)
     axes[1].set_xlabel("Time")
     axes[1].set_ylabel("Volatility")
-
     plt.savefig(output_path, dpi=100, bbox_inches="tight")
     plt.close()
 
@@ -68,7 +60,6 @@ def plot_volatility_forecast(
         return
 
     fig, ax = plt.subplots(figsize=(10, 6))
-
     ax.plot(
         forecast_variance.values,
         marker="o",
@@ -78,6 +69,5 @@ def plot_volatility_forecast(
     )
     ax.set_xlabel("Horizon")
     ax.set_ylabel("Variance")
-
     plt.savefig(output_path, dpi=100, bbox_inches="tight")
     plt.close()

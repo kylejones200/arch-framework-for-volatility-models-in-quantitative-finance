@@ -8,22 +8,16 @@ from arch import arch_model
 
 def main():
     np.random.seed(42)
-
     # Set random seed for reproducibility
-
     # Configure logging
     logging.basicConfig(level=logging.INFO, format="%(message)s")
-
-
     # Simulate returns with volatility clustering
     n = 1000
     omega = 0.1
     alpha = 0.8
-
     errors = np.random.normal(size=n)
     volatility = np.zeros(n)
     returns = np.zeros(n)
-
     for t in range(1, n):
         volatility[t] = np.sqrt(omega + alpha * errors[t - 1] ** 2)
         returns[t] = volatility[t] * np.random.normal()
@@ -33,15 +27,12 @@ def main():
     data.plot(subplots=True, figsize=(10, 6), title="Simulated Returns and Volatility")
     plt.savefig("simulated_returns_volatility.png")
     plt.show()
-
     # Fit an ARCH(1) model
     arch_model_fit = arch_model(data["returns"], vol="ARCH", p=1).fit()
     logging.info(arch_model_fit.summary())
-
     # Forecast volatility
     forecast = arch_model_fit.forecast(horizon=10)
     forecast_variance = forecast.variance.iloc[-1]
-
     # Plot forecasted volatility
     plt.figure(figsize=(10, 6))
     plt.plot(forecast_variance, marker="o", label="Forecasted Variance")
