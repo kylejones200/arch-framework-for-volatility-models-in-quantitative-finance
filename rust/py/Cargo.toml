@@ -1,0 +1,15 @@
+[package]
+name = "arch_framework_for_volatility_models_in_quantitative_finance_rs"
+description = "Python bindings (PyO3) for arch_framework_for_volatility_models_in_quantitative_finance_core"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+
+[lib]
+name = "arch_framework_for_volatility_models_in_quantitative_finance_rs"
+crate-type = ["cdylib"]
+
+[dependencies]
+arch_framework_for_volatility_models_in_quantitative_finance_core = { path = "../core" }
+pyo3 = { version = "0.28", features = ["extension-module"] }
+numpy = "0.28"

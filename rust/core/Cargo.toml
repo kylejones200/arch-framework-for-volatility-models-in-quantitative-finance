@@ -1,0 +1,9 @@
+[package]
+name = "arch_framework_for_volatility_models_in_quantitative_finance_core"
+description = "EWMA variance recursion"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+
+[lib]
+path = "src/lib.rs"

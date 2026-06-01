@@ -1,0 +1,13 @@
+[package]
+name = "arch_framework_for_volatility_models_in_quantitative_finance_bench"
+description = "Standalone Rust benchmark (no Python)"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+
+[[bin]]
+name = "bench"
+path = "src/main.rs"
+
+[dependencies]
+arch_framework_for_volatility_models_in_quantitative_finance_core = { path = "../core" }

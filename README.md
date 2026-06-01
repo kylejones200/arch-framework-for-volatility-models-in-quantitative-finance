@@ -27,7 +27,10 @@ ARCH models are popular because they match real data better than constant-varian
 │   └── plotting.py    # Tufte-style plotting utilities
 ├── tests/             # Unit tests
 ├── data/              # Data files
-└── images/            # Generated plots and figures
+├── images/            # Generated plots and figures
+├── rust/                   # Rust port (core + PyO3 + CLI bench)
+├── benchmark_rust.py       # Python vs Rust benchmark
+├── src/compute_kernel.py   # Python/numpy reference kernel
 ```
 
 ## Configuration
@@ -50,6 +53,31 @@ ARCH models capture volatility clustering:
 - By default, generates synthetic returns with volatility clustering.
 - ARCH models assume volatility depends only on past squared errors.
 - For more complex dynamics, consider GARCH or other extensions.
+
+## Rust performance port
+
+Side-by-side **Python vs Rust** implementation of the numeric hot loop — EWMA variance recursion. Reference PyO3 benchmark: **see `benchmark_rust.py`** on a release build (local machine; run `benchmark_rust.py` to reproduce).
+
+| Path | Role |
+|------|------|
+| `src/compute_kernel.py` | Python/numpy reference kernel |
+| `rust/core/` | Pure Rust library |
+| `rust/py/` | PyO3 bindings |
+| `rust/bench/` | Standalone CLI benchmark |
+| `benchmark_rust.py` | Python vs Rust timing + correctness check |
+
+```bash
+# Rust-only CLI benchmark
+cd rust && cargo run --release -p arch_framework_for_volatility_models_in_quantitative_finance_bench
+
+# Python vs Rust (PyO3)
+pip install maturin numpy
+maturin develop --release -m rust/py/Cargo.toml
+python benchmark_rust.py
+```
+
+Python ML training, solvers, and orchestration stay in Python; Rust targets the numeric hot loops. Stochastic generators validate output shapes; deterministic kernels match at tight floating-point tolerance.
+
 
 ## Disclaimer
 
